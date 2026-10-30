@@ -1,0 +1,192 @@
+[
+  {
+    "city": "唐山市",
+    "before": "未查到",
+    "after": "不明确",
+    "review_date": "2026-10-30",
+    "reason": "原始标签未查到统一为不明确；未取得完整分工文本",
+    "source": "http://www.tangshan.gov.cn/",
+    "review_scope": "底表与抓取失败说明；未完成现行原文验证",
+    "report": "核实报告_20261030.md"
+  },
+  {
+    "city": "淄博市",
+    "before": "A",
+    "after": "不明确",
+    "review_date": "2026-10-30",
+    "reason": "分类与常务协助定义不符，历史公报不足以确认现行分类",
+    "source": "https://www.zibo.gov.cn/gongkai/site_srmzfbgs/channel_zhengfugongbao/doc_6704e7c4420457464271655d_f930f1764881f672974a45246adebb9e.pdf",
+    "review_scope": "底表与报告复核；未完成现行原文验证",
+    "report": "核实报告_20261030.md"
+  },
+  {
+    "city": "芜湖市",
+    "before": "C",
+    "after": "不明确",
+    "review_date": "2026-10-30",
+    "reason": "常务分工未公开或未取到",
+    "source": "https://www.wuhu.gov.cn/ldzc/",
+    "review_scope": "底表与报告复核；未完成现行原文验证",
+    "report": "核实报告_20261030.md"
+  },
+  {
+    "city": "蚌埠市",
+    "before": "C",
+    "after": "不明确",
+    "review_date": "2026-10-30",
+    "reason": "常务分工未公开或未取到",
+    "source": "https://www.bengbu.gov.cn/ldzc/index.html",
+    "review_scope": "底表与报告复核；未完成现行原文验证",
+    "report": "核实报告_20261030.md"
+  },
+  {
+    "city": "岳阳市",
+    "before": "B",
+    "after": "E",
+    "review_date": "2026-10-30",
+    "reason": "原文",
+    "source": "https://www.yueyang.gov.cn/ldjs/70888/content_2169050.html",
+    "review_scope": "官网页面检索支持协助分管；现行市长段未核",
+    "report": "核实报告_20261030.md"
+  },
+  {
+    "city": "遵义市",
+    "before": "C",
+    "after": "不明确",
+    "review_date": "2026-10-30",
+    "reason": "常务分工未公开或未取到",
+    "source": "https://www.zunyi.gov.cn/zwgk/ldzc_5978702/",
+    "review_scope": "底表与报告复核；未完成现行原文验证",
+    "report": "核实报告_20261030.md"
+  },
+  {
+    "city": "成都市",
+    "before": "C",
+    "after": "不明确",
+    "review_date": "2026-10-30",
+    "reason": "常务分工未公开或未取到",
+    "source": "https://www.chengdu.gov.cn/Site/szxx",
+    "review_scope": "底表与报告复核；未完成现行原文验证",
+    "report": "核实报告_20261030.md"
+  },
+  {
+    "city": "秦皇岛市",
+    "before": "C",
+    "after": "不明确",
+    "review_date": "2026-10-30",
+    "reason": "旧版显示常务分管财政局，现行版本未取得",
+    "source": "https://qhd.gov.cn/index/zwgk/zfld.html",
+    "review_scope": "底表与报告复核；未完成现行原文验证",
+    "report": "核实报告_20261030.md"
+  },
+  {
+    "city": "邯郸市",
+    "before": "C",
+    "after": "不明确",
+    "review_date": "2026-10-30",
+    "reason": "旧版显示常务分管财政局，现行版本未取得",
+    "source": "https://www.hd.gov.cn/hdzfxxgk/zfgb/gb2019/201906/201909/t20190904_1172527.html",
+    "review_scope": "底表与报告复核；未完成现行原文验证",
+    "report": "核实报告_20261030.md"
+  },
+  {
+    "city": "沧州市",
+    "before": "C",
+    "after": "不明确",
+    "review_date": "2026-10-30",
+    "reason": "旧版显示常务分管财政局，现行版本未取得",
+    "source": "https://www.cangzhou.gov.cn/cangzhou/c116531/202609/668f98f969244247a6f060b919905c10.shtml",
+    "review_scope": "底表与报告复核；未完成现行原文验证",
+    "report": "核实报告_20261030.md"
+  },
+  {
+    "city": "运城市",
+    "before": "C",
+    "after": "不明确",
+    "review_date": "2026-10-30",
+    "reason": "旧版显示常务分管财政局，现行版本未取得",
+    "source": "https://www.yuncheng.gov.cn/doc/2021/04/14/143856.shtml",
+    "review_scope": "底表与报告复核；未完成现行原文验证",
+    "report": "核实报告_20261030.md"
+  },
+  {
+    "city": "忻州市",
+    "before": "C",
+    "after": "不明确",
+    "review_date": "2026-10-30",
+    "reason": "常务分工未公开或未取到",
+    "source": "https://zwgk.sxxz.gov.cn/xzsrmzf/ldxx/wzy/wzy/",
+    "review_scope": "底表与报告复核；未完成现行原文验证",
+    "report": "核实报告_20261030.md"
+  },
+  {
+    "city": "赤峰市",
+    "before": "C",
+    "after": "不明确",
+    "review_date": "2026-10-30",
+    "reason": "常务分工未公开或未取到",
+    "source": "https://chifeng.gov.cn/zwgk/ldzc/szfld/hsy",
+    "review_scope": "底表与报告复核；未完成现行原文验证",
+    "report": "核实报告_20261030.md"
+  },
+  {
+    "city": "巴彦淖尔市",
+    "before": "C",
+    "after": "不明确",
+    "review_date": "2026-10-30",
+    "reason": "常务分工未公开或未取到",
+    "source": "https://www.bynr.gov.cn/zfxxgk/ldzc/zrh/index_1.html",
+    "review_scope": "底表与报告复核；未完成现行原文验证",
+    "report": "核实报告_20261030.md"
+  },
+  {
+    "city": "铜陵市",
+    "before": "C",
+    "after": "不明确",
+    "review_date": "2026-10-30",
+    "reason": "常务分工未公开或未取到",
+    "source": "https://www.tl.gov.cn/tlsrmzf/wsb/pc/list.html",
+    "review_scope": "底表与报告复核；未完成现行原文验证",
+    "report": "核实报告_20261030.md"
+  },
+  {
+    "city": "池州市",
+    "before": "C",
+    "after": "不明确",
+    "review_date": "2026-10-30",
+    "reason": "常务分工未公开或未取到",
+    "source": "https://www.chizhou.gov.cn/Leader/show",
+    "review_scope": "底表与报告复核；未完成现行原文验证",
+    "report": "核实报告_20261030.md"
+  },
+  {
+    "city": "湛江市",
+    "before": "C",
+    "after": "不明确",
+    "review_date": "2026-10-30",
+    "reason": "常务分工未公开或未取到",
+    "source": "https://www.zhanjiang.gov.cn/ldzc/content/post_2025396.html",
+    "review_scope": "底表与报告复核；未完成现行原文验证",
+    "report": "核实报告_20261030.md"
+  },
+  {
+    "city": "儋州市",
+    "before": "C",
+    "after": "不明确",
+    "review_date": "2026-10-30",
+    "reason": "常务分工未公开或未取到",
+    "source": "https://www.danzhou.gov.cn/danzhou/xxgk/szf/szfld/",
+    "review_scope": "底表与报告复核；未完成现行原文验证",
+    "report": "核实报告_20261030.md"
+  },
+  {
+    "city": "攀枝花市",
+    "before": "C",
+    "after": "不明确",
+    "review_date": "2026-10-30",
+    "reason": "常务分工未公开或未取到",
+    "source": "http://panzhihua.gov.cn/hdcy/szxx/szxx/index.shtml",
+    "review_scope": "底表与报告复核；未完成现行原文验证",
+    "report": "核实报告_20261030.md"
+  }
+]

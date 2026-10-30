@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>中国地级市领导分工查询表</title>
+<meta name="description" content="293 个地级市的市长、副市长分工与财政归属，数据来自各市政府官网公开文本，每个市标注收录完整度与文本年份。">
+<meta property="og:title" content="中国地级市领导分工查询表">
+<meta property="og:description" content="搜城市名，看市长副市长分工、财政归谁管，附官网原文链接。">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#faf9f7;color:#1f2937;line-height:1.6;padding-bottom:50px}
+header{background:#fff;border-bottom:3px solid #A6192E;padding:22px 16px 16px}
+h1{font-size:22px;color:#1F3A57}
+.sub{font-size:12.5px;color:#6b7280;margin-top:6px}
+.note{background:#fff7f7;border-left:3px solid #A6192E;padding:10px 12px;margin-top:12px;font-size:12px;color:#7f1d1d;line-height:1.7}
+.wrap{max-width:1000px;margin:0 auto;padding:0 14px}
+.bar{position:sticky;top:0;background:#faf9f7;padding:12px 0 8px;z-index:9;border-bottom:1px solid #eee}
+input,select,button{font-size:15px;border:1px solid #e5e7eb;border-radius:6px;background:#fff;color:#1f2937;outline:none;font-family:inherit}
+input:focus,select:focus{border-color:#A6192E}
+#q{width:100%;padding:12px 14px;font-size:16px}
+.sel{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.sel select{flex:1;min-width:110px;padding:8px 10px;font-size:13px}
+.row{display:flex;align-items:center;gap:10px;padding:8px 0 4px}
+.count{font-size:12.5px;color:#6b7280;flex:1}
+#exp{font-size:12px;padding:4px 10px;cursor:pointer;color:#1F3A57}
+#exp:hover{border-color:#1F3A57}
+details{background:#fff;border:1px solid #eee;border-left:4px solid #d1d5db;border-radius:6px;margin-bottom:8px}
+details.A{border-left-color:#A6192E}
+details.B{border-left-color:#1F3A57}
+summary{list-style:none;cursor:pointer;padding:11px 13px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";margin-left:auto;color:#cbd5e1;font-size:17px;font-weight:400}
+details[open] summary::after{content:"−"}
+.city{font-size:16px;font-weight:600;color:#111827}
+.prov{font-size:11.5px;color:#9ca3af}
+.tag{font-size:11px;padding:2px 7px;border-radius:9px;background:#f3f4f6;color:#4b5563;white-space:nowrap}
+.tag.A{background:#fdeaea;color:#A6192E}
+.tag.B{background:#eaf0f6;color:#1F3A57}
+.cv{font-size:11px;padding:1px 7px;border-radius:9px;border:1px solid #e5e7eb;color:#6b7280;white-space:nowrap}
+.cv.full{border-color:#c7d7e6;color:#1F3A57}
+.cv.fiscal,.cv.none{border-style:dashed;color:#9ca3af}
+.yr{font-size:11px;color:#9ca3af;white-space:nowrap}
+.yr.old{color:#b45309;font-weight:600}
+.body{padding:0 13px 13px;border-top:1px dashed #f0f0f0}
+.meta{font-size:12.5px;color:#6b7280;padding:9px 0;line-height:1.8}
+.meta b{color:#374151}
+.warn{font-size:12px;color:#92400e;background:#fffbeb;border-radius:4px;padding:6px 9px;margin-bottom:6px}
+.empty{font-size:12.5px;color:#6b7280;background:#f9fafb;border-radius:4px;padding:10px 12px;line-height:1.8}
+.btn{display:inline-block;margin-top:6px;padding:3px 10px;border:1px solid #1F3A57;border-radius:5px;color:#1F3A57;font-size:12px}
+.p{font-size:12.5px;padding:6px 0;border-top:1px solid #f7f7f7;display:flex;gap:8px;flex-wrap:wrap}
+.p .nm{font-weight:600;color:#111827;white-space:nowrap}
+.p .ti{color:#9ca3af;font-size:12px}
+.p .du{flex-basis:100%;color:#4b5563;line-height:1.75}
+.p .du i{color:#9ca3af;font-style:normal}
+.p.a .nm{color:#A6192E}
+.p.a .nm::after{content:"协助";font-size:10px;background:#fdeaea;color:#A6192E;padding:0 5px;border-radius:8px;margin-left:5px;font-weight:400}
+.fb{font-size:11.5px;color:#9ca3af;padding-top:8px;text-align:right}
+.fb a{color:#9ca3af}
+a{color:#1F3A57;text-decoration:none;border-bottom:1px solid #d1d5db}
+.btn,.fb a{border-bottom-width:1px}
+.skeleton{height:52px;background:linear-gradient(90deg,#f3f2ef 25%,#e9e7e3 50%,#f3f2ef 75%);background-size:200% 100%;animation:sh 1.2s infinite;border-radius:6px;margin-bottom:8px}
+@keyframes sh{0%{background-position:200% 0}100%{background-position:-200% 0}}
+footer{max-width:1000px;margin:26px auto 0;padding:16px;font-size:11.5px;color:#9ca3af;border-top:1px solid #eee;line-height:1.9}
+footer b{color:#6b7280}
+@media(max-width:600px){.sel select{flex:1 1 45%;min-width:0}.row{flex-wrap:wrap}h1{font-size:19px}.city{font-size:15px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>中国地级市领导分工查询表 <span style="font-size:12px;color:#6b7280">公开试用版</span></h1>
+<div class="sub" id="stat">293 个地级市 · 2026 年 10 月快照 · 数据来自各市政府官网公开文本</div>
+<div class="note"><b>先看这段：</b>本表统计的是公开文本，不是实际分工。每个市名旁标有收录状态（已收录几人、仅财政归属、未收录）和文本年份，橙色年份表示文本早于 2024 年，班子可能已调整。没收录不代表该市没有公开分工，使用前请点原文核对。</div>
+</div></header>
+<div class="wrap">
+<div class="bar">
+<input id="q" aria-label="搜索城市或省份" placeholder="搜城市：苏州 / suzhou / sz / 江苏" autocomplete="off">
+<div class="sel">
+<select id="fp" aria-label="省份"><option value="">全部省份</option></select>
+<select id="ff" aria-label="财政分工分类"><option value="">全部财政归属</option></select>
+<select id="fs" aria-label="文本类型"><option value="">全部文本类型</option><option value="正式通知">有正式通知</option><option value="领导之窗">仅领导之窗</option><option value="未查到">未查到分工文本</option></select>
+<select id="fc" aria-label="收录状态"><option value="">全部收录状态</option><option value="full">人员较全</option><option value="part">人员部分收录</option><option value="unk">已收录，班子人数未知</option><option value="fiscal">仅财政归属</option><option value="none">未收录</option></select>
+<select id="so" aria-label="排序"><option value="">默认排序</option><option value="cv">收录完整度</option><option value="date">文本日期：新到旧</option><option value="nla">班子人数：少到多</option><option value="nld">班子人数：多到少</option></select>
+</div>
+<div class="row"><div class="count" id="cnt" role="status" aria-live="polite">加载中…</div><button id="exp" type="button" hidden>导出当前结果 CSV</button><button id="reset" type="button" style="padding:4px 10px;font-size:12px">重置</button></div>
+</div>
+<div id="list"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>
+</div>
+<footer>
+<b>数据来源：</b>各市人民政府门户网站公开的领导分工通知与领导之窗页面，采集时间 2026 年 10 月。<br>
+<b>财政归属口径：</b>A 市长兼管或负责财政、常务协助分管；B 常务直接分管财政局；C 已见文本中市长和常务双方均未提及；D 财政落在非常务副市长名下；E 其他变体；未核实 / 信息不足包括分工页不全、分类冲突和待核实记录，不能视为明确的分工形态。<br>
+<b>收录状态口径：</b>人员较全指收录人数不少于班子人数减一；部分收录指少于这个数；仅财政归属指已从原文判定财政归属，但未收录人员明细；未收录指两者都没有。<br>
+<b>数据处理：</b>人员明细经过自动清理，去掉了抓取时混入的正文碎片和备注；原文较长被截断的分工已在条目末尾注明。<br>
+试用版尚未完成逐市核验；收录完整度不代表准确率。数据反映采集时可见文本，以官网为准。<span id="fbAll"></span>
+</footer>
+<script>
+const CONFIG={
+  repo:'',        // 例如 https://github.com/你的用户名/仓库名 ，部署在 github.io 时可留空自动识别
+  goatcounter:''  // 例如 https://你的代码.goatcounter.com/count ，留空则不统计
+};
+const MAJOR=['石家庄市','太原市','呼和浩特市','沈阳市','长春市','哈尔滨市','南京市','杭州市','合肥市','福州市','南昌市','济南市','郑州市','武汉市','长沙市','广州市','南宁市','海口市','成都市','贵阳市','昆明市','拉萨市','西安市','兰州市','西宁市','银川市','乌鲁木齐市','大连市','青岛市','宁波市','厦门市','深圳市'];
+// 同音或同首字母冲突时的第二档排序，经济总量较大的非省会城市，手工维护
+const TIER2=['苏州市','无锡市','佛山市','东莞市','泉州市','南通市','常州市','烟台市','唐山市','徐州市','温州市','绍兴市','嘉兴市','台州市','扬州市','盐城市','潍坊市','临沂市','洛阳市','襄阳市','宜昌市','榆林市','鄂尔多斯市','珠海市','惠州市'];
+const F_LABEL={A:'A 市长兼管或负责财政',B:'B 常务直接分管',C:'C 已见文本双方未提',D:'D 非常务副市长分管',E:'E 其他变体',不明确:'未核实 / 信息不足'};
+const F_ORDER=['A','B','D','C','E','不明确'];
+const CV_LABEL={full:'人员较全',part:'部分收录',unk:'班子人数未知',fiscal:'仅财政归属',none:'未收录'};
+const CV_RANK={full:0,part:1,unk:2,fiscal:3,none:4};
+let DATA=[],VIEW=[];
+const $=id=>document.getElementById(id);
+const q=$('q'),fp=$('fp'),ff=$('ff'),fs=$('fs'),fc=$('fc'),so=$('so'),list=$('list'),cnt=$('cnt'),exp=$('exp');
+const REPO=CONFIG.repo||(location.hostname.endsWith('.github.io')?'https://github.com/'+location.hostname.split('.')[0]+'/'+(location.pathname.split('/')[1]||location.hostname):'');
+
+function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function track(path){if(window.goatcounter&&window.goatcounter.count)window.goatcounter.count({path:path,event:true})}
+if(CONFIG.goatcounter){const s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.dataset.goatcounter=CONFIG.goatcounter;document.head.appendChild(s)}
+
+function prep(d,i){
+  const n=d.pp.length,nl=parseInt(d.nl)||0;
+  d.i=i;d.nlN=nl;d.y=parseInt((d.v||'').slice(0,4))||0;
+  d.major=MAJOR.includes(d.c)?2:TIER2.includes(d.c)?1:0;
+  d.cv=!n?('ABCDE'.includes(d.f)?'fiscal':'none'):!nl?'unk':n>=nl-1?'full':'part';
+  d.cvText=d.cv==='fiscal'?'仅财政归属':d.cv==='none'?'未收录':d.cv==='unk'?'已收录 '+n+' 人':'已收录 '+Math.min(n,nl)+'/'+nl+' 人';
+  d.ratio=nl?n/nl:0;
+  d.tk=d.k.split(' ');
+}
+
+// 数值越小越相关，0 表示不匹配
+function rank(d,kw){
+  if(!kw)return 9;
+  const t=d.tk;
+  if(/[\u4e00-\u9fa5]/.test(kw)){
+    if(d.c===kw||t[1]===kw)return 1;
+    if(d.c.startsWith(kw))return 2;
+    if(d.c.includes(kw))return 3;
+    if(d.p.startsWith(kw))return 6;
+    return 0;
+  }
+  if(t[2]===kw||t[2]===kw+'shi')return 1;
+  if(t[2].startsWith(kw))return 2;
+  if(t[3].startsWith(kw))return 4;
+  if(t[5].startsWith(kw)||t[6]===kw)return 6;
+  return 0;
+}
+
+function sorter(mode){
+  const byProv=(a,b)=>a.p.localeCompare(b.p,'zh-CN')||a.c.localeCompare(b.c,'zh-CN');
+  const base=(a,b)=>a.r-b.r||(b.major-a.major)||byProv(a,b);
+  if(mode==='cv')return(a,b)=>CV_RANK[a.cv]-CV_RANK[b.cv]||b.ratio-a.ratio||base(a,b);
+  if(mode==='date')return(a,b)=>(b.v||'').localeCompare(a.v||'')||base(a,b);
+  if(mode==='nla')return(a,b)=>(a.nlN||99)-(b.nlN||99)||base(a,b);
+  if(mode==='nld')return(a,b)=>b.nlN-a.nlN||base(a,b);
+  return base;
+}
+
+function yearTag(d){
+  if(!d.y)return '<span class="yr">日期不明</span>';
+  return '<span class="yr'+(d.y<2024?' old':'')+'">'+d.y+' 年文本</span>';
+}
+
+function issueLink(d){
+  if(!REPO)return '';
+  const title='['+d.c+'] 数据报错或补充';
+  const body='城市：'+d.p+' '+d.c+'\n当前收录状态：'+d.cvText+'\n当前文本日期：'+(d.v||'不明')+'\n原文链接：'+(d.u||'无')+'\n\n哪里不对或缺了什么（可附官网链接）：\n';
+  return '<div class="fb"><a href="'+REPO+'/issues/new?title='+encodeURIComponent(title)+'&body='+encodeURIComponent(body)+'" target="_blank" rel="noopener" data-ev="issue">这条不对或缺人？报错或补充</a></div>';
+}
+
+function card(d){
+  const link=d.u?'<a href="'+esc(d.u)+'" target="_blank" rel="noopener" data-ev="source">原文</a>':'<span style="color:#cbd5e1">无链接</span>';
+  const meta='<div class="meta">'+(d.o?'财政分工记录：<b>'+esc(d.o)+'</b>　':'')+(d.nl?'班子 <b>'+esc(d.nl)+'</b> 人　':'')+'文本日期 '+esc(d.v||'不明')+'　'+link+'</div>';
+  const warn=(d.y&&d.y<2024?'<div class="warn">该文本发布于 '+d.y+' 年，班子可能已调整，以下名单只反映当时的分工。</div>':'')+(d.review?'<div class="warn">分类复核：'+esc(d.review.review_date)+'。'+esc(d.review.reason)+'。核验范围：'+esc(d.review.review_scope)+(d.review.source?' · <a href="'+esc(d.review.source)+'" target="_blank" rel="noopener">复核来源</a>':'')+'</div>':'');
+  let body;
+  if(d.pp.length){
+    body=d.pp.map(x=>'<div class="p'+(x.a?' a':'')+'"><span class="nm">'+esc(x.n)+'</span>'+(x.t?'<span class="ti">'+esc(x.t)+'</span>':'')+'<div class="du">'+(x.d?esc(x.d)+(x.x?'<i>（原文较长，此处截断，完整内容见原文）</i>':''):'<i>分工文本未能识别，请看原文</i>')+'</div></div>').join('');
+    if(d.cv==='part')body+='<div class="p" style="color:#9ca3af">班子共 '+esc(d.nl)+' 人，本表只收录了上面 '+d.pp.length+' 人，其余请看原文。</div>';
+  }else if(d.cv==='fiscal'){
+    body='<div class="empty">本表未收录该市的人员明细。本表保留了财政分工分类，尚未完成全量现行核验，各人分工请核对原文。'+(d.u?'<br><a class="btn" href="'+esc(d.u)+'" target="_blank" rel="noopener" data-ev="source">去官网看原文</a>':'')+'</div>';
+  }else{
+    body='<div class="empty">本表未收录该市的分工文本，不代表该市没有公开分工。'+(d.u?'<br><a class="btn" href="'+esc(d.u)+'" target="_blank" rel="noopener" data-ev="source">去该市政府官网查找</a>':'')+'</div>';
+  }
+  return '<details class="'+esc(d.f)+'" data-i="'+d.i+'"><summary><span class="city">'+esc(d.c)+'</span><span class="prov">'+esc(d.p)+'</span><span class="tag '+esc(d.f)+'">'+esc(F_LABEL[d.f]||d.fm)+'</span><span class="tag">'+esc(d.st)+'</span><span class="cv '+d.cv+'">'+d.cvText+'</span>'+yearTag(d)+'</summary><div class="body">'+meta+warn+body+issueLink(d)+'</div></details>';
+}
+
+let searchTimer;
+function render(){
+  const raw=q.value.trim(),kw=raw.toLowerCase(),pv=fp.value,fv=ff.value,sv=fs.value,cv=fc.value,sm=so.value;
+  VIEW=DATA.filter(d=>{
+    d.r=rank(d,kw);
+    return d.r&&(!pv||d.p===pv)&&(!fv||d.f===fv)&&(!sv||d.st===sv)&&(!cv||d.cv===cv);
+  }).sort(sorter(sm));
+  cnt.textContent='共 '+VIEW.length+' 个市'+(raw?'（搜「'+raw+'」）':'')+' · 点击展开';
+  exp.hidden=!VIEW.length;
+  list.innerHTML=VIEW.map(card).join('')||'<div class="count">没有匹配的城市，试试「苏」「suz」「江苏」</div>';
+  const p=new URLSearchParams();
+  if(raw)p.set('q',raw);if(pv)p.set('p',pv);if(fv)p.set('f',fv);if(sv)p.set('s',sv);if(cv)p.set('c',cv);if(sm)p.set('o',sm);
+  history.replaceState(null,'',p.toString()?'?'+p.toString():location.pathname);
+  clearTimeout(searchTimer);
+  if(raw)searchTimer=setTimeout(()=>track('search/'+raw+'/'+VIEW.length),1500);
+}
+
+function sync(){
+  const p=new URLSearchParams(location.search);
+  q.value=p.get('q')||'';fp.value=p.get('p')||'';ff.value=p.get('f')||'';fs.value=p.get('s')||'';fc.value=p.get('c')||'';so.value=p.get('o')||'';
+}
+
+function csvCell(s){s=String(s??'');return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s}
+function exportCSV(){
+  const head=['省份','城市','财政归属类型','财政归属说明','财政分工记录','市长名义管财政','文本类型','文本日期','班子人数','副职人数','收录状态','原文链接','分类复核日期','分类修正理由','核验范围','复核来源','姓名','职务','是否协助','分工','分工是否截断'];
+  const rows=[head];
+  VIEW.forEach(d=>{
+    const base=[d.p,d.c,d.f,d.fm,d.o,d.mf,d.st,d.v,d.nl,d.nv,d.cvText,d.u,d.review?.review_date||'',d.review?.reason||'',d.review?.review_scope||'',d.review?.source||''];
+    if(!d.pp.length)rows.push(base.concat(['','','','','']));
+    d.pp.forEach(x=>rows.push(base.concat([x.n,x.t,x.a?'是':'',x.d,x.x?'是':''])));
+  });
+  const blob=new Blob(['\ufeff'+rows.map(r=>r.map(csvCell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='地级市领导分工_'+new Date().toISOString().slice(0,10).replace(/-/g,'')+'.csv';
+  a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  track('export/'+VIEW.length);
+}
+
+fetch('data.json').then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(d=>{
+  DATA=d;DATA.forEach(prep);
+  [...new Set(DATA.map(x=>x.p))].sort((a,b)=>a.localeCompare(b,'zh-CN')).forEach(p=>fp.add(new Option(p,p)));
+  const fm={};DATA.forEach(x=>fm[x.f]=x.fm);
+  F_ORDER.filter(f=>fm[f]).forEach(f=>ff.add(new Option(F_LABEL[f],f)));
+  const c={};DATA.forEach(x=>c[x.cv]=(c[x.cv]||0)+1);
+  $('stat').textContent=DATA.length+' 个地级市 · 人员较全 '+(c.full||0)+' · 部分收录 '+((c.part||0)+(c.unk||0))+' · 仅财政归属 '+(c.fiscal||0)+' · 未收录 '+(c.none||0)+' · 2026 年 10 月快照';
+  if(REPO)$('fbAll').innerHTML='发现错误或想补充数据，欢迎在 <a href="'+REPO+'/issues" target="_blank" rel="noopener">GitHub Issues</a> 反馈。';
+  sync();render();
+}).catch(e=>{cnt.textContent='数据加载失败：'+e.message+'。如果是直接双击打开的本地文件，请用本地服务器或部署后访问。'});
+
+[q,fp,ff,fs,fc,so].forEach(e=>e.addEventListener('input',render));
+exp.addEventListener('click',exportCSV);
+$('reset').addEventListener('click',()=>{[q,fp,ff,fs,fc,so].forEach(e=>e.value='');render();q.focus()});
+list.addEventListener('toggle',e=>{const d=DATA[e.target.dataset.i];if(d&&e.target.open)track('open/'+d.c)},true);
+list.addEventListener('click',e=>{const a=e.target.closest('a[data-ev]');if(!a)return;const d=DATA[a.closest('details').dataset.i];track(a.dataset.ev+'/'+d.c)});
+</script>
+</body></html>
